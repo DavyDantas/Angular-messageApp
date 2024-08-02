@@ -1,0 +1,159 @@
+.chat-room{
+    background: radial-gradient(rgba(63, 63, 63, 0.89) 10%, rgb(0, 0, 0) 85%) ,url(./256.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    flex: 1;
+    margin:  5px 5px;
+    min-width: 500px;
+    max-width: calc(100%);
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-room p{
+    margin: 0 3px;
+    font-weight: 600;
+}
+
+.info-owner{
+    font-weight: 400 !important;
+    font-size: 10pt !important;
+}
+
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    flex: 1;
+}
+
+.message{
+    max-width: 450px;
+    width: auto;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    height: auto;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 9pt;
+    margin-bottom: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(185, 185, 185, 0.171);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.699);
+    color: #ffffff;
+}
+
+.current-user{
+    align-self: flex-end;
+    margin-right: 20px;
+    background-color: rgba(28, 17, 68, 0.322);
+}
+
+.current-user .owner-message{
+    display: none;
+}
+
+.other-user{
+    align-self: flex-start;
+    margin-left: 20px;
+    background-color: rgba(110, 110, 110, 0.267);
+}
+
+.message .owner-message p{
+    font-weight: 600;
+    font-size: 10.5pt;
+    margin: 0;
+    color: rgb(158, 136, 255);
+}
+
+.other-user + .current-user{
+    margin-top: 20px;
+}
+
+.current-user + .other-user{
+    margin-top: 20px;
+}
+
+.chat-room footer{
+    display: flex;
+    width: hug(100%);
+    height: auto;
+    max-height: auto;
+    background-color: transparent;
+    margin: 10px 0 0px 0;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 0;
+    border-bottom-right-radius: 10px;
+}
+
+.send-message, .send-message form{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-height: 100px;
+}
+
+.send-message form textarea{
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: rgb(46, 46, 46);
+    color: rgb(255, 255, 255);
+    font-size: 10pt;
+    padding: 10px;
+    align-items: baseline;
+    resize: none; /* Evita redimensionamento manual */
+    overflow: visible; /* Esconde as barras de rolagem */
+    height: 18px; /* Altura mínima */
+    max-height: auto; /* Altura máxima para o textarea */
+}
+
+.chat-room header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: hug(100%);
+    height: 40px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(248, 248, 248, 0.041);
+    margin: 0 0 10px 0;
+}
+
+.header-infos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.header-img{
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: rgb(66, 171, 231);
+    display: flex;
+    font-size: 9pt;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-title{
+    margin: 0 10px;
+    font-size: 12pt;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+}
+
+.header-title p{
+    margin: 0;
+}
