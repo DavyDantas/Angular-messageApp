@@ -6,14 +6,39 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-
-  private baseUrl = 'http://127.0.0.1:8000'; // URL da sua API
+  private baseUrl = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) {}
 
-  getRooms(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/rooms/`);
+  createRoom(room: { name: string; owner: number }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/create/room/`, room);
   }
 
-  // Adicione outros métodos conforme necessário
+  getRooms(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/rooms/`);
+  }
+
+  getRoomsByUserId(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/rooms/${userId}`);
+  }
+
+  createUser(user: { name: string }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/create/user/`, user);
+  }
+
+  getUserById(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/users/${userId}`);
+  }
+
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/users/`);
+  }
+
+  createMessage(message: { content: string; owner: number; room: number }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/create/message/`, message);
+  }
+
+  getMessagesByRoom(roomId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/rooms/${roomId}/messages/`);
+  }
 }

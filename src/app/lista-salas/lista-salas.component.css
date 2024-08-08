@@ -53,3 +53,61 @@
     font-weight: 400 !important;
     font-size: 10pt !important;
 }
+
+.profile {
+    width: hug(100%);
+    height: auto;
+    margin-top: 5px;
+    background-color: rgb(228, 228, 228);
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: start;  
+    flex-direction: column;  
+    padding: 5px;
+}
+
+.profile h2{
+    margin: 0 0 5px 0;
+    font-size: 14pt;
+    font-weight: 500;
+}
+
+.profile form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: start;
+    align-items: center;
+}
+
+.profile form input{
+    width: 80%;
+    height: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: rgb(34, 34, 34);
+    padding: 5px;
+    margin: 5px 0;
+    color: white;
+}
+
+.profile form button{
+    width: 20%;
+    height: 30px;
+    border: none;
+    outline: none;
+    margin-left: 5px;
+    border-radius: 5px;
+    background-color: rgb(38, 160, 58);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.profile p{
+    font-size: 12pt;
+    font-weight: 600;
+    margin: 5px 0;
+}
