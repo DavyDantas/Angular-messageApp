@@ -5,75 +5,39 @@
                 IMG
             </div>
             <div class="header-title">
-                <p>Titulo sala</p>
-                <p class="info-owner">Dono</p>
-            </div>
+                <p>{{room?.name}}</p>
+                <p class="info-owner">{{ room?.owner_name }}</p>
+            </div> 
         </div>
     </header>
     <div class="messages-container">
-        <div class="message other-user">
-            <div class="owner-message">
-                <p>Damião Teodósio</p>
-            </div>
-            <div class="content-message">
-                <p>
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                    lorem ipsum lorem ipsums
-                </p>
-            </div>
-        </div>
-        <div class="message other-user">
-            <div class="owner-message">
-                <p>Damião Teodósio</p>
-            </div>
-            <div class="content-message">
-                <p>
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                    lorem ipsum lorem ipsums
-                </p>
-            </div>
-        </div>
-        <div class="message current-user">
-            <div class="owner-message">
-                <p>Davy Dantas</p>
-            </div>
-            <div class="content-message">
-                <p>
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                    lorem ipsum lorem ipsums
-                </p>
-            </div>
-        </div>
-        <div class="message current-user">
-            <div class="owner-message">
-                <p>Davy Dantas</p>
-            </div>
-            <div class="content-message">
-                <p>
-                    lorem ipsum
-                </p>
-            </div>
-        </div>
-        <div class="message other-user">
-            <div class="owner-message">
-                <p>Damião Teodósio</p>
-            </div>
-            <div class="content-message">
-                <p>
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                    lorem ipsum lorem ipsums
-                </p>
-            </div>
-        </div>
+        @for (msg of messages; track msg.id){
+            @if (msg.owner === User.getUser()?.id){
+                <div class="message current-user">
+                    <div class="owner-message">
+                        <p>{{ userNames[msg.owner] }}</p>
+                    </div>
+                    <div class="content-message">
+                        <p>{{msg.content}}</p>
+                    </div>
+                </div>
+            }@else{
+                <div class="message other-user">
+                    <div class="owner-message">
+                        <p>{{ userNames[msg.owner] }}</p>
+                    </div>
+                    <div class="content-message">
+                        <p>{{msg.content}}</p>
+                    </div>
+                </div>
+            }
+        }
     </div>
     <footer>
         <div class="send-message">
-            <form action="">
-                <textarea type="text" placeholder="Digite uma mensagem"></textarea>
+            <form (ngSubmit)="sendMessage()">
+                <textarea type="text" [(ngModel)]="contentMsg" name="contentMsg" placeholder="Digite uma mensagem"></textarea>
+                <button>Enviar</button>
             </form>
         </div>
     </footer>

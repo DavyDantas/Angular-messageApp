@@ -1,12 +1,14 @@
 <div class="container">
-  <div class="main">
-      <!-- lista de salas -->
+    <div class="main">
       <div class="list-rooms">
-          <app-lista-salas></app-lista-salas>
+        <app-lista-salas [userNames]="userNames" (room)="selectRoom($event)"></app-lista-salas>
       </div>
-      <!-- chat -->
-      <div class="chat-room">
-          <app-chat></app-chat>
-      </div>
+  
+      <ng-container *ngIf="user.getUser().id !== -1 && selectRoom !== null">
+        <div class="chat-room">
+          <app-chat [userNames]="userNames" [currentRoom]="setRoom"></app-chat>
+        </div>
+      </ng-container>
+    </div>
   </div>
-</div>
+  

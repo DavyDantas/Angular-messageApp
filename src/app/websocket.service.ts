@@ -18,8 +18,8 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/rooms/`);
   }
 
-  getRoomsByUserId(userId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/rooms/${userId}`);
+  getRoomsById(roomId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/rooms/${roomId}`);
   }
 
   createUser(user: { name: string }): Observable<any> {
@@ -34,7 +34,7 @@ export class ApiService {
     return this.http.get<any[]>(`${this.baseUrl}/users/`);
   }
 
-  createMessage(message: { content: string; owner: number; room: number }): Observable<any> {
+  createMessage(message: { content: string; owner: number|undefined; room: number }): Observable<any> {
     return this.http.post(`${this.baseUrl}/create/message/`, message);
   }
 

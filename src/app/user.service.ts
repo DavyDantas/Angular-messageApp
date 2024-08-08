@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserService {
-  private user: { id: number, name: string } | null = null;
+  private user: { id: number, name: string } = { id: -1, name: '' };
 
   constructor() { }
 
@@ -12,7 +12,7 @@ export class UserService {
     this.user = user;
   }
 
-  getUser(): { id: number, name: string } | null{
+  getUser(): { id: number, name: string }{
     return this.user;
   }
 }

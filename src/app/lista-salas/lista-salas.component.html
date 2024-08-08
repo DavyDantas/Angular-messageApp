@@ -1,19 +1,20 @@
 <div class="list-rooms">
-    <div *ngIf="User.getUser() !== null; else createUserTemplate">
-        <div class="profile">
-            <div class="info-profile">
-                <p>{{ User.getUser()?.name }}</p>
+    @if (User.getUser().id !== -1) {
+        <div>
+            <div class="profile">
+                <div class="info-profile">
+                    <p>{{ User.getUser()?.name }}</p>
+                </div>
+            </div>
+            <div class="profile">
+                <h2>Criar sala</h2>
+                <form (ngSubmit)="createRoom()">
+                    <input type="text" [(ngModel)]="roomName" name="roomName" placeholder="Nome da sala">
+                    <button>Criar sala</button>
+                </form>
             </div>
         </div>
-        <div class="profile">
-            <h2>Criar sala</h2>
-            <form (ngSubmit)="createRoom()">
-                <input type="text" [(ngModel)]="roomName" name="roomName" placeholder="Nome da sala">
-                <button>Criar sala</button>
-            </form>
-        </div>
-    </div>
-    <ng-template #createUserTemplate>
+    } @else {
         <div class="profile">
             <h2>Criar usuário</h2>
             <form (ngSubmit)="createUser()" >
@@ -21,12 +22,12 @@
                 <button>Entrar</button>
             </form>
         </div>
-    </ng-template>
-    <div class="room" *ngFor="let room of rooms">
+    }
+    <div class="room" *ngFor="let room of rooms" (click)="selectRoom(room.id)">
         <div class="room-img">IMG</div>
         <div class="info-room">
             <p>{{ room.name }}</p>
-            <p class="info-owner">{{ userNames.get(room.owner) }}</p>
+            <p class="info-owner">{{ userNames[room.owner] }}</p>
         </div>
     </div>
 </div>
