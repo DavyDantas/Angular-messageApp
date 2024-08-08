@@ -16,7 +16,7 @@ import { ApiService } from './websocket.service';
 
 export class AppComponent implements OnInit{
   title = 'zap2';
-  setRoom: number = 0;
+  setRoom: number = -1;
   userNames: { [key: number]: string } = {};
 
   constructor(protected user: UserService, private api: ApiService) {}

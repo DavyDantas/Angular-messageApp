@@ -10,6 +10,7 @@
     width: auto;
     display: flex;
     flex-direction: column;
+    max-height: 100%;
 }
 
 .info-room p{
@@ -25,8 +26,9 @@
 .messages-container {
     display: flex;
     flex-direction: column;
-    height: auto;
+    max-height: 100%;
     width: 100%;
+    overflow-y: auto;
     flex: 1;
 }
 
@@ -110,11 +112,25 @@
     font-size: 10pt;
     padding: 10px;
     align-items: baseline;
-    resize: none; /* Evita redimensionamento manual */
-    overflow: visible; /* Esconde as barras de rolagem */
-    height: 18px; /* Altura mínima */
-    max-height: auto; /* Altura máxima para o textarea */
+    resize: none;
+    overflow: visible;
+    height: 18px;
+    max-height: auto;
 }
+
+.send-message form button{
+    border-radius: 10px;
+    background-color: rgb(240, 240, 240);
+    color: rgb(17, 119, 150);    
+    padding: 0 5px;
+    border: 0;
+    width: 50px;
+    height: auto; 
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+
 
 .chat-room header{
     display: flex;

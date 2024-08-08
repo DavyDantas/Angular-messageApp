@@ -3,14 +3,14 @@
         <div>
             <div class="profile">
                 <div class="info-profile">
-                    <p>{{ User.getUser()?.name }}</p>
+                    <p>{{ User.getUser().name }}</p>
                 </div>
             </div>
             <div class="profile">
                 <h2>Criar sala</h2>
                 <form (ngSubmit)="createRoom()">
                     <input type="text" [(ngModel)]="roomName" name="roomName" placeholder="Nome da sala">
-                    <button>Criar sala</button>
+                    <button>Criar</button>
                 </form>
             </div>
         </div>
@@ -23,11 +23,13 @@
             </form>
         </div>
     }
-    <div class="room" *ngFor="let room of rooms" (click)="selectRoom(room.id)">
-        <div class="room-img">IMG</div>
-        <div class="info-room">
-            <p>{{ room.name }}</p>
-            <p class="info-owner">{{ userNames[room.owner] }}</p>
+    @for (room of rooms; track room.id){
+        <div class="room" (click)="selectRoom(room.id)">
+            <div class="room-img">IMG</div>
+            <div class="info-room">
+                <p>{{ room.name }}</p>
+                <p class="info-owner">{{ userNames[room.owner] }}</p>
+            </div>
         </div>
-    </div>
+    }
 </div>

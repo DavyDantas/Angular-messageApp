@@ -5,17 +5,17 @@
                 IMG
             </div>
             <div class="header-title">
-                <p>{{room?.name}}</p>
-                <p class="info-owner">{{ room?.owner_name }}</p>
+                <p>{{room.name}}</p>
+                <p class="info-owner">{{ room.owner_name }}</p>
             </div> 
         </div>
     </header>
     <div class="messages-container">
         @for (msg of messages; track msg.id){
-            @if (msg.owner === User.getUser()?.id){
+            @if (msg.owner === User.getUser().id){
                 <div class="message current-user">
                     <div class="owner-message">
-                        <p>{{ userNames[msg.owner] }}</p>
+                        <p>{{ userNames[msg.owner] }} - {{ msg.created_at }}</p>
                     </div>
                     <div class="content-message">
                         <p>{{msg.content}}</p>
@@ -37,8 +37,15 @@
         <div class="send-message">
             <form (ngSubmit)="sendMessage()">
                 <textarea type="text" [(ngModel)]="contentMsg" name="contentMsg" placeholder="Digite uma mensagem"></textarea>
-                <button>Enviar</button>
+                <button><mat-icon>send</mat-icon></button>
             </form>
         </div>
     </footer>
 </div>
+
+<script> 
+document.addEventListener("DOMContentLoaded", function() {
+    const container = document.querySelector('.messages-container');
+    container.scrollWidth = container.scrollHeight; 
+});
+</script>

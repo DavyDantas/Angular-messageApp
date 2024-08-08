@@ -41,9 +41,10 @@ body, html {
     border: solid 1px rgba(167, 167, 167, 0.384);
     border-radius: 10px;
     flex-direction: row;
-    height: auto;
+    height: 100hv;
     width: calc(100% - 20px);
     margin: 20px;
     flex: 1;
     justify-content: center;
+    overflow: hidden;
 }

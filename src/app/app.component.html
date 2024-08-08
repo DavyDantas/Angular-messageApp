@@ -3,12 +3,14 @@
       <div class="list-rooms">
         <app-lista-salas [userNames]="userNames" (room)="selectRoom($event)"></app-lista-salas>
       </div>
-  
-      <ng-container *ngIf="user.getUser().id !== -1 && selectRoom !== null">
-        <div class="chat-room">
-          <app-chat [userNames]="userNames" [currentRoom]="setRoom"></app-chat>
-        </div>
-      </ng-container>
+      
+      @if (user.getUser().id !== -1 && setRoom !== -1){
+        <ng-container>
+          <div class="chat-room">
+            <app-chat [userNames]="userNames" [currentRoom]="setRoom"></app-chat>
+          </div>
+        </ng-container>
+      }
     </div>
   </div>
   

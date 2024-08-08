@@ -2,12 +2,12 @@ import { Component, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
 import { ApiService } from '../websocket.service';
 import { UserService } from '../user.service';
 import { FormsModule } from '@angular/forms';
-import { ListaSalasComponent } from '../lista-salas/lista-salas.component';
+import { MatIconModule } from '@angular/material/icon'
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, MatIconModule],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
@@ -15,7 +15,7 @@ export class ChatComponent implements OnChanges{
   messages:any = []
   contentMsg: string = '';
   @Input() currentRoom!: number;
-  room!: { id: number; owner: number; name: string; participants: []; owner_name: string; };
+  room: { id: number; owner: number; name: string; participants: []; owner_name: string; } = { id: 0, owner: 0, name: '', participants: [], owner_name: '' };
   @Input() userNames: { [key: number]: string } = {};
 
   constructor(protected api: ApiService , protected User: UserService, private renderer: Renderer2) { }
@@ -23,24 +23,26 @@ export class ChatComponent implements OnChanges{
   private ws: WebSocket | undefined;
 
   ngOnChanges(): void {
-    this.messages = [];
     this.getRoom(this.currentRoom);
     this.webSocket();
     this.getMessages(this.currentRoom);
   }
 
   sendMessage() {
-    if (this.ws) {
-      this.ws.send(this.contentMsg);
-    } 
-    this.contentMsg = '';
+    if (this.contentMsg !== '') {
+      if (this.ws) {
+        this.ws.send(this.contentMsg);
+      } 
+      this.contentMsg = '';
+    }
   }
   
   getMessages(id:number): void {
+    this.messages = [];
     this.api.getMessagesByRoom(id).subscribe((data: any) => {
       this.messages = data;
     });
-    
+    console.log(this.messages);
   }
 
   webSocket(): void {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { ApiService } from '../websocket.service';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../user.service';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './lista-salas.component.html',
   styleUrls: ['./lista-salas.component.css']
 })
-export class ListaSalasComponent implements OnInit {
+export class ListaSalasComponent implements OnChanges {
   rooms: any[] = [];
   public newUserName: string = '';
   public roomName = '';
@@ -22,25 +22,20 @@ export class ListaSalasComponent implements OnInit {
 
   constructor(private apiService: ApiService, public User: UserService) {}
 
-  ngOnInit(): void {
-    this.apiService.getRooms().subscribe((data: any) => {
-      this.rooms = data;
-    });
-
-    this.webSocket(this.User.getUser().id);
+  ngOnChanges(): void {
+    this.webSocket()
+    this.getRooms()
   }
 
-  webSocket(userId: number): void {
-    if (userId !== -1) {
-      this.ws = new WebSocket(`ws://127.0.0.1:8000/ws/rooms/${userId}/`);
+
+  webSocket(): void {
+    if (this.User.getUser().id !== -1) {
+      this.ws = new WebSocket(`ws://127.0.0.1:8000/ws/rooms/${this.User.getUser().id}/`);
       this.ws.onmessage = (event) => {
-        const newRoom = JSON.parse(event.data);
-        this.rooms.push(newRoom);
-        console.log('Nova sala:', newRoom);
-        console.log('Salas:', this.rooms);
+        this.rooms.push(JSON.parse(event.data));
       };
-    }
   }
+}
 
   selectRoom(roomId: number): void {
     this.room.emit(roomId);
@@ -53,7 +48,7 @@ export class ListaSalasComponent implements OnInit {
         (response) => {
           if (response) {
             this.User.setUser(response);
-            this.webSocket(response.id);
+            this.webSocket()
           }
         },
         (error) => {
@@ -64,22 +59,20 @@ export class ListaSalasComponent implements OnInit {
   }
 
   createRoom(): void {
-    if (this.User.getUser() && this.roomName) {
+    console.log(this.roomName);
+    if (this.roomName !== ''){ 
       if (this.ws) {
-        this.apiService.createRoom({ name: this.roomName, owner: this.User.getUser().id }).subscribe(
-          (response) => {
-            if (response) {
-              if (this.ws) {
-                this.ws.send(JSON.stringify(response));
-              }
-              this.roomName = '';
-            }
-          },
-          (error) => {
-            console.error('Erro ao criar sala:', error);
-          }
-        );
+        this.ws.send(this.roomName);
+        this.roomName = '';
       }
     }
   }
+
+  getRooms(): void {
+    this.rooms = []
+    this.apiService.getRooms().subscribe((data: any) => {
+      this.rooms = data;
+    });
+  }
+
 }
